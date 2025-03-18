@@ -23,6 +23,8 @@ def plot_feature_importance(model, feature_names):
                   labels={'Importance': 'Importance Score', 'Feature': 'Feature Name'})
     return fig
 
-def timeseries_plot(data, x, y, title, xaxis_title, yaxis_title):
-    fig = px.line(data, x=x, y=y, title=title, labels={x: xaxis_title, y: yaxis_title})
+def timeseries_plot(data_frame, y_columns, title,):
+    #scattergl with lines and no markers
+    df_sorted = data_frame.sort_index()
+    fig = px.line(df_sorted, x=df_sorted.index, y=y_columns, title=title)
     return fig

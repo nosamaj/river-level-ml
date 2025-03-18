@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 from data_preprocessing import create_rolling_sums, merge_and_rename, split_data
 from model import train_model,make_predictions
-from plots import plot_predictions, plot_feature_importance
+from plots import plot_predictions, plot_feature_importance, timeseries_plot
 from utils import load_csv
 
 def main():
@@ -52,7 +52,9 @@ def main():
             df_predictions = make_predictions(models[quantile],X_test,quantile)
             st.write(f"Quantile: {quantile}")
             st.write(plot_predictions(y_test, df_predictions[f"{quantile*100}th_centile"]))
-            st.write(plot_feature_importance(models[quantile], X_train.columns))    
+            st.write(plot_feature_importance(models[quantile], X_train.columns))
+            st.dataframe(df_predictions)
+            st.write(timeseries_plot(df_predictions, [f"{quantile*100}th_centile"], "Level Data"))    
 
 if __name__ == "__main__":
     main()
