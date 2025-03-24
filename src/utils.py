@@ -1,4 +1,5 @@
 import pandas as pd
+import streamlit as st
 
 def load_csv(file):
     """Load a CSV file into a pandas DataFrame."""
